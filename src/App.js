@@ -1,14 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Lets build slack</h1>
-    
-    </div>
+  
+      <Router>
+        <>
+        <Switch>
+          <Route path="/">
+            <h1>This is the homepage</h1>
+          </Route>
+        </Switch>
+        </>
+    </Router>
+
   );
 }
 
