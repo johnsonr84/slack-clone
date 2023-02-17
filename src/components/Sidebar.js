@@ -1,7 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 
-// Icons
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
 import SidebarOption from "./SidebarOption";
@@ -15,20 +13,24 @@ import AppsIcon from "@material-ui/icons/Apps";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
-
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
+import styled from "styled-components";
 
 function Sidebar() {
-    const [channels] = useCollection(db.collection("rooms"));
+  const [user] = useAuthState(auth);
+  const [channels] = useCollection(db.collection("rooms"));
 
   return (
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-            <h2>DevDork Org</h2>
-        <FiberManualRecordIcon />
-          <h3>Robert</h3>
+          <h2>Dev Dork HQ</h2>
+          <h3>
+            <FiberManualRecordIcon />
+            {user?.displayName}
+          </h3>
         </SidebarInfo>
         <CreateIcon />
       </SidebarHeader>
